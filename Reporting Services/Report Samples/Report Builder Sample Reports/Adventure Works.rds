@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Adventure Works</Name>
+  <DataSourceID>49b6d85f-eba9-4a6a-bd5d-3e0e4cdaa7f7</DataSourceID>
+  <ConnectionProperties>
+    <Extension>RS</Extension>
+    <ConnectString>server=http://localhost/reportserver;datasource=/Models/Adventure Works</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
+  </ConnectionProperties>
+</RptDataSource>

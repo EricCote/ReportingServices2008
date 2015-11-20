@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Server Management Sample Reports", "Server Management Sample Reports\Server Management Sample Reports.rptproj", "{9F53B009-7D2A-4542-B4C4-C8998878663D}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Execution Log Sample Reports", "Execution Log Sample Reports\Execution Log Sample Reports.rptproj", "{BE02C634-2671-49FE-8AFB-E997F393646B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Production|Default = Production|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.Debug|Default.ActiveCfg = Debug
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.Debug|Default.Build.0 = Debug
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.Debug|Default.Deploy.0 = Debug
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.DebugLocal|Default.Build.0 = DebugLocal
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.DebugLocal|Default.Deploy.0 = DebugLocal
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.Production|Default.ActiveCfg = Production
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.Production|Default.Build.0 = Production
+		{9F53B009-7D2A-4542-B4C4-C8998878663D}.Production|Default.Deploy.0 = Production
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.Debug|Default.ActiveCfg = Debug
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.Debug|Default.Build.0 = Debug
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.DebugLocal|Default.Build.0 = DebugLocal
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.Production|Default.ActiveCfg = Production
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.Production|Default.Build.0 = Production
+		{BE02C634-2671-49FE-8AFB-E997F393646B}.Production|Default.Deploy.0 = Production
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

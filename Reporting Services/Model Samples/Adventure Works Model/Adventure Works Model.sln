@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{999D2CB9-9277-4465-A902-1604ED3686A3}") = "Adventure Works Model", "Adventure Works Model.smdlproj", "{E16CA865-1FE0-45A7-9668-3389A5CCA4EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Production|Default = Production|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E16CA865-1FE0-45A7-9668-3389A5CCA4EA}.Production|Default.ActiveCfg = Production
+		{E16CA865-1FE0-45A7-9668-3389A5CCA4EA}.Production|Default.Build.0 = Production
+		{E16CA865-1FE0-45A7-9668-3389A5CCA4EA}.Production|Default.Deploy.0 = Production
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

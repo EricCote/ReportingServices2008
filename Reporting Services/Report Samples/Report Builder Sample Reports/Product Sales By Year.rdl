@@ -1,0 +1,1131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="dataSource1">
+      <DataSourceReference>Adventure Works</DataSourceReference>
+      <rd:DataSourceID>3b92c476-ae6b-4d95-a9c9-8f8e62f4fb2a</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <BottomMargin>0.5in</BottomMargin>
+  <RightMargin>0.5in</RightMargin>
+  <ReportParameters>
+    <ReportParameter Name="OrderDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=CDate("2003-05-01")</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Order Date</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>8.5in</InteractiveWidth>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <PageHeight>11in</PageHeight>
+  <PageWidth>8.5in</PageWidth>
+  <Body>
+    <ReportItems>
+      <Textbox Name="Title">
+        <Left>0.5in</Left>
+        <Top>0.5in</Top>
+        <ZIndex>2</ZIndex>
+        <Width>6.5in</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontFamily>Tahoma</FontFamily>
+          <FontWeight>700</FontWeight>
+          <FontSize>18pt</FontSize>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CustomProperties>
+          <CustomProperty>
+            <Name>rb:Watermark</Name>
+            <Value>Click to add title</Value>
+          </CustomProperty>
+        </CustomProperties>
+        <CanGrow>true</CanGrow>
+        <Height>0.375in</Height>
+        <Value>Product Sales By Year</Value>
+      </Textbox>
+      <Matrix Name="matrix">
+        <MatrixColumns>
+          <MatrixColumn>
+            <Width>1.29456in</Width>
+          </MatrixColumn>
+        </MatrixColumns>
+        <NoRows>No data was found that matched your report criteria.</NoRows>
+        <Left>0.5in</Left>
+        <RowGroupings>
+          <RowGrouping>
+            <Width>1.5in</Width>
+            <FixedHeader>true</FixedHeader>
+            <DynamicRows>
+              <ReportItems>
+                <Textbox Name="ProductCategory_Value">
+                  <DataElementOutput>Output</DataElementOutput>
+                  <ZIndex>6</ZIndex>
+                  <Action>
+                    <Drillthrough>
+                      <ReportName>=DataSources!dataSource1.DataSourceReference</ReportName>
+                      <Parameters>
+                        <Parameter Name="rs:EntityID">
+                          <Value>Gacb1e610-3ea3-4922-a2d8-e503e1d0a3d0</Value>
+                        </Parameter>
+                        <Parameter Name="rs:DrillType">
+                          <Value>Detail</Value>
+                        </Parameter>
+                        <Parameter Name="rs:Command">
+                          <Value>Drillthrough</Value>
+                        </Parameter>
+                        <Parameter Name="DrillthroughSourceQuery">
+                          <Value>=DataSets!dataSet.RewrittenCommandText</Value>
+                        </Parameter>
+                        <Parameter Name="DrillthroughContext">
+                          <Value>=CreateDrillthroughContext()</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Drillthrough>
+                  </Action>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#c6dbff</BackgroundColor>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <CanGrow>true</CanGrow>
+                  <Value>=Fields!ProductCategory1.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Subtotal>
+                <ReportItems>
+                  <Textbox Name="ProductCategory_SubtotalHeader">
+                    <ZIndex>2</ZIndex>
+                    <Style>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingBottom>2pt</PaddingBottom>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>700</FontWeight>
+                      <FontSize>8pt</FontSize>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <BackgroundColor>#8fb3f3</BackgroundColor>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                    </Style>
+                    <CanGrow>true</CanGrow>
+                    <Value>Total</Value>
+                  </Textbox>
+                </ReportItems>
+                <Style>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingBottom>2pt</PaddingBottom>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontWeight>700</FontWeight>
+                  <FontSize>8pt</FontSize>
+                  <BorderColor>
+                    <Default>LightGrey</Default>
+                  </BorderColor>
+                  <BackgroundColor>#8fb3f3</BackgroundColor>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                </Style>
+              </Subtotal>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=IIf(True, Fields!ProductCategory1.Value, Nothing)</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Grouping Name="matrix_ProductCategory">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!ProductCategory.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicRows>
+          </RowGrouping>
+          <RowGrouping>
+            <Width>1.5in</Width>
+            <FixedHeader>true</FixedHeader>
+            <DynamicRows>
+              <ReportItems>
+                <Textbox Name="ProductSubcategory_Value">
+                  <DataElementOutput>Output</DataElementOutput>
+                  <ZIndex>5</ZIndex>
+                  <Action>
+                    <Drillthrough>
+                      <ReportName>=DataSources!dataSource1.DataSourceReference</ReportName>
+                      <Parameters>
+                        <Parameter Name="rs:EntityID">
+                          <Value>G8f91f894-d044-4da9-a138-772900aee688</Value>
+                        </Parameter>
+                        <Parameter Name="rs:DrillType">
+                          <Value>Detail</Value>
+                        </Parameter>
+                        <Parameter Name="rs:Command">
+                          <Value>Drillthrough</Value>
+                        </Parameter>
+                        <Parameter Name="DrillthroughSourceQuery">
+                          <Value>=DataSets!dataSet.RewrittenCommandText</Value>
+                        </Parameter>
+                        <Parameter Name="DrillthroughContext">
+                          <Value>=CreateDrillthroughContext()</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Drillthrough>
+                  </Action>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#c6dbff</BackgroundColor>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <CanGrow>true</CanGrow>
+                  <Value>=Fields!ProductSubcategory2.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Subtotal>
+                <ReportItems>
+                  <Textbox Name="ProductSubcategory_SubtotalHeader">
+                    <ZIndex>1</ZIndex>
+                    <Style>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingBottom>2pt</PaddingBottom>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>700</FontWeight>
+                      <FontSize>8pt</FontSize>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <BackgroundColor>#c7d9f9</BackgroundColor>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                    </Style>
+                    <CanGrow>true</CanGrow>
+                    <Value>Total</Value>
+                  </Textbox>
+                </ReportItems>
+                <Style>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingBottom>2pt</PaddingBottom>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontWeight>700</FontWeight>
+                  <FontSize>8pt</FontSize>
+                  <BorderColor>
+                    <Default>LightGrey</Default>
+                  </BorderColor>
+                  <BackgroundColor>#c6dbff</BackgroundColor>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                </Style>
+              </Subtotal>
+              <Visibility>
+                <ToggleItem>ProductCategory_Value</ToggleItem>
+                <Hidden>true</Hidden>
+              </Visibility>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=IIf(True, Fields!ProductSubcategory2.Value, Nothing)</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Grouping Name="matrix_ProductSubcategory">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!ProductSubcategory.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicRows>
+          </RowGrouping>
+          <RowGrouping>
+            <Width>1.875in</Width>
+            <FixedHeader>true</FixedHeader>
+            <DynamicRows>
+              <ReportItems>
+                <Textbox Name="Name_Value">
+                  <DataElementOutput>Output</DataElementOutput>
+                  <ZIndex>4</ZIndex>
+                  <Action>
+                    <Drillthrough>
+                      <ReportName>=DataSources!dataSource1.DataSourceReference</ReportName>
+                      <Parameters>
+                        <Parameter Name="rs:EntityID">
+                          <Value>G73aed554-12c3-4750-8981-997fe69705ab</Value>
+                        </Parameter>
+                        <Parameter Name="rs:DrillType">
+                          <Value>Detail</Value>
+                        </Parameter>
+                        <Parameter Name="rs:Command">
+                          <Value>Drillthrough</Value>
+                        </Parameter>
+                        <Parameter Name="DrillthroughSourceQuery">
+                          <Value>=DataSets!dataSet.RewrittenCommandText</Value>
+                        </Parameter>
+                        <Parameter Name="DrillthroughContext">
+                          <Value>=CreateDrillthroughContext()</Value>
+                        </Parameter>
+                      </Parameters>
+                    </Drillthrough>
+                  </Action>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#c6dbff</BackgroundColor>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <CanGrow>true</CanGrow>
+                  <Value>=Fields!Product3.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Subtotal>
+                <ReportItems>
+                  <Textbox Name="Product_SubtotalHeader">
+                    <Style>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingBottom>2pt</PaddingBottom>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>700</FontWeight>
+                      <FontSize>8pt</FontSize>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <BackgroundColor>#c7d9f9</BackgroundColor>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                    </Style>
+                    <CanGrow>true</CanGrow>
+                    <Value>Total</Value>
+                  </Textbox>
+                </ReportItems>
+                <Style>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingBottom>2pt</PaddingBottom>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontWeight>700</FontWeight>
+                  <FontSize>8pt</FontSize>
+                  <BorderColor>
+                    <Default>LightGrey</Default>
+                  </BorderColor>
+                  <BackgroundColor>White</BackgroundColor>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                </Style>
+              </Subtotal>
+              <Visibility>
+                <ToggleItem>ProductSubcategory_Value</ToggleItem>
+                <Hidden>true</Hidden>
+              </Visibility>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=SUM(Fields!SumTotalDue_Sum.Value)</SortExpression>
+                  <Direction>Descending</Direction>
+                </SortBy>
+                <SortBy>
+                  <SortExpression>=IIf(True, Fields!Product3.Value, Nothing)</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Grouping Name="matrix_Product">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Product.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicRows>
+          </RowGrouping>
+        </RowGroupings>
+        <ColumnGroupings>
+          <ColumnGrouping>
+            <DynamicColumns>
+              <ReportItems>
+                <Textbox Name="textbox2">
+                  <DataElementOutput>Output</DataElementOutput>
+                  <ZIndex>11</ZIndex>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <TextAlign>Center</TextAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontWeight>700</FontWeight>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#518ae5</BackgroundColor>
+                    <Color>White</Color>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                  </Style>
+                  <Value>Order Year, Order Quarter (Sum Total Due)</Value>
+                </Textbox>
+              </ReportItems>
+              <Grouping Name="matrix_ColumnGroupsHeader">
+                <GroupExpressions>
+                  <GroupExpression>ColumnGroupsHeader</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicColumns>
+            <Height>0.25in</Height>
+            <FixedHeader>true</FixedHeader>
+          </ColumnGrouping>
+          <ColumnGrouping>
+            <DynamicColumns>
+              <ReportItems>
+                <Textbox Name="OrderYear_Value">
+                  <DataElementOutput>Output</DataElementOutput>
+                  <ZIndex>10</ZIndex>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <TextAlign>Center</TextAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#c7d9f9</BackgroundColor>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <Value>=Fields!OrderYear.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Subtotal>
+                <ReportItems>
+                  <Textbox Name="OrderYear_SubtotalHeader">
+                    <ZIndex>9</ZIndex>
+                    <Style>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <TextAlign>Center</TextAlign>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingBottom>2pt</PaddingBottom>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <BackgroundColor>#c7d9f9</BackgroundColor>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                    </Style>
+                    <CanGrow>true</CanGrow>
+                    <Value>Total</Value>
+                  </Textbox>
+                </ReportItems>
+                <Style>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingBottom>2pt</PaddingBottom>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontWeight>400</FontWeight>
+                  <FontSize>8pt</FontSize>
+                  <BorderColor>
+                    <Default>LightGrey</Default>
+                  </BorderColor>
+                  <BackgroundColor>White</BackgroundColor>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                </Style>
+              </Subtotal>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=IIf(True, Fields!OrderYear.Value, Nothing)</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Grouping Name="matrix_OrderYear">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!OrderYear.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicColumns>
+            <Height>0.25in</Height>
+            <FixedHeader>true</FixedHeader>
+          </ColumnGrouping>
+          <ColumnGrouping>
+            <DynamicColumns>
+              <ReportItems>
+                <Textbox Name="OrderQuarter_Value">
+                  <DataElementOutput>Output</DataElementOutput>
+                  <ZIndex>8</ZIndex>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#c7d9f9</BackgroundColor>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <Value>=Fields!OrderQuarter.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Subtotal>
+                <ReportItems>
+                  <Textbox Name="OrderQuarter_SubtotalHeader">
+                    <ZIndex>7</ZIndex>
+                    <Style>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingBottom>2pt</PaddingBottom>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <BackgroundColor>#c7d9f9</BackgroundColor>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                    </Style>
+                    <CanGrow>true</CanGrow>
+                    <Value>Total</Value>
+                  </Textbox>
+                </ReportItems>
+                <Style>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingBottom>2pt</PaddingBottom>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontWeight>400</FontWeight>
+                  <FontSize>8pt</FontSize>
+                  <BorderColor>
+                    <Default>LightGrey</Default>
+                  </BorderColor>
+                  <BackgroundColor>White</BackgroundColor>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                </Style>
+              </Subtotal>
+              <Visibility>
+                <ToggleItem>OrderYear_Value</ToggleItem>
+                <Hidden>true</Hidden>
+              </Visibility>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=IIf(True, Fields!OrderQuarter.Value, Nothing)</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Grouping Name="matrix_OrderQuarter">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!OrderQuarter.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicColumns>
+            <Height>0.5in</Height>
+            <FixedHeader>true</FixedHeader>
+          </ColumnGrouping>
+        </ColumnGroupings>
+        <DataSetName>dataSet</DataSetName>
+        <Top>1.25in</Top>
+        <ZIndex>1</ZIndex>
+        <Width>7.46412in</Width>
+        <Corner>
+          <ReportItems>
+            <Rectangle Name="matrix_corner">
+              <ReportItems>
+                <Textbox Name="textbox4">
+                  <ZIndex>3</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <BackgroundColor>White</BackgroundColor>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                  </Style>
+                  <Height>0.5in</Height>
+                  <Value />
+                </Textbox>
+                <Textbox Name="ProductCategory_Header">
+                  <Top>0.5in</Top>
+                  <ZIndex>2</ZIndex>
+                  <Width>1.5in</Width>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <TextAlign>Center</TextAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontWeight>700</FontWeight>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#518ae5</BackgroundColor>
+                    <Color>White</Color>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <UserSort>
+                    <SortExpression>=Fields!ProductCategory1.Value</SortExpression>
+                    <SortExpressionScope>matrix_ProductCategory</SortExpressionScope>
+                  </UserSort>
+                  <Value>Product Category</Value>
+                </Textbox>
+                <Textbox Name="ProductSubcategory_Header">
+                  <Left>1.5in</Left>
+                  <Top>0.5in</Top>
+                  <ZIndex>1</ZIndex>
+                  <Width>1.5in</Width>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <TextAlign>Center</TextAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontWeight>700</FontWeight>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#518ae5</BackgroundColor>
+                    <Color>White</Color>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <UserSort>
+                    <SortExpression>=Fields!ProductSubcategory2.Value</SortExpression>
+                    <SortExpressionScope>matrix_ProductSubcategory</SortExpressionScope>
+                  </UserSort>
+                  <Value>Product Subcategory</Value>
+                </Textbox>
+                <Textbox Name="Name_Header">
+                  <Left>3in</Left>
+                  <Top>0.5in</Top>
+                  <Style>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <TextAlign>Center</TextAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontWeight>700</FontWeight>
+                    <FontSize>8pt</FontSize>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <BackgroundColor>#518ae5</BackgroundColor>
+                    <Color>White</Color>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <Language>en-US</Language>
+                  </Style>
+                  <UserSort>
+                    <SortExpression>=Fields!Product3.Value</SortExpression>
+                    <SortExpressionScope>matrix_Product</SortExpressionScope>
+                  </UserSort>
+                  <Value>Product</Value>
+                </Textbox>
+              </ReportItems>
+              <ZIndex>12</ZIndex>
+            </Rectangle>
+          </ReportItems>
+        </Corner>
+        <MatrixRows>
+          <MatrixRow>
+            <Height>0.25in</Height>
+            <MatrixCells>
+              <MatrixCell>
+                <ReportItems>
+                  <Textbox Name="SumTotalDue_Value">
+                    <DataElementOutput>Output</DataElementOutput>
+                    <ZIndex>3</ZIndex>
+                    <Action>
+                      <Drillthrough>
+                        <ReportName>=DataSources!dataSource1.DataSourceReference</ReportName>
+                        <Parameters>
+                          <Parameter Name="rs:EntityID">
+                            <Value>G333db059-a14a-46db-b58e-9ae10efc0f07</Value>
+                          </Parameter>
+                          <Parameter Name="rs:DrillType">
+                            <Value>List</Value>
+                          </Parameter>
+                          <Parameter Name="rs:Command">
+                            <Value>Drillthrough</Value>
+                          </Parameter>
+                          <Parameter Name="DrillthroughSourceQuery">
+                            <Value>=DataSets!dataSet.RewrittenCommandText</Value>
+                          </Parameter>
+                          <Parameter Name="DrillthroughContext">
+                            <Value>=CreateDrillthroughContext()</Value>
+                          </Parameter>
+                        </Parameters>
+                      </Drillthrough>
+                    </Action>
+                    <Style>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <TextAlign>Center</TextAlign>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingBottom>2pt</PaddingBottom>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>c2</Format>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <BackgroundColor>White</BackgroundColor>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                      <Language>en-US</Language>
+                    </Style>
+                    <CustomProperties>
+                      <CustomProperty>
+                        <Name>rb:DisplayName</Name>
+                        <Value>Sum Total Due</Value>
+                      </CustomProperty>
+                    </CustomProperties>
+                    <CanGrow>true</CanGrow>
+                    <Value>=SUM(Fields!SumTotalDue_Sum.Value)</Value>
+                  </Textbox>
+                </ReportItems>
+              </MatrixCell>
+            </MatrixCells>
+          </MatrixRow>
+        </MatrixRows>
+      </Matrix>
+      <Textbox Name="FilterDescription">
+        <Left>0.5in</Left>
+        <Top>0.875in</Top>
+        <Width>6.5in</Width>
+        <Style>
+          <PaddingLeft>3pt</PaddingLeft>
+          <PaddingBottom>3pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <PaddingRight>3pt</PaddingRight>
+          <PaddingTop>3pt</PaddingTop>
+        </Style>
+        <CustomProperties>
+          <CustomProperty>
+            <Name>rb:SpecialContent</Name>
+            <Value>FilterDescription</Value>
+          </CustomProperty>
+        </CustomProperties>
+        <CanGrow>true</CanGrow>
+        <Height>0.25in</Height>
+        <Value>Filter: Sales Order Details with: All of (Product Category in Bikes;Clothing;Accessories, Order Date on or after (prompted))</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>2.75in</Height>
+  </Body>
+  <rd:ReportID>2cabfe74-58bb-4820-b31b-ab26000db9a8</rd:ReportID>
+  <LeftMargin>0.5in</LeftMargin>
+  <DataSets>
+    <DataSet Name="dataSet">
+      <Query>
+        <CommandText>&lt;SemanticQuery xmlns="http://schemas.microsoft.com/sqlserver/2004/10/semanticmodeling" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qd="http://schemas.microsoft.com/sqlserver/2004/11/semanticquerydesign" xmlns:rb="http://schemas.microsoft.com/sqlserver/2004/11/reportbuilder"&gt;
+  &lt;Hierarchies&gt;
+    &lt;Hierarchy&gt;
+      &lt;BaseEntity&gt;
+        &lt;!--Sale--&gt;
+        &lt;EntityID&gt;G7d048573-fb87-42c3-9660-f171d6645f3a&lt;/EntityID&gt;
+      &lt;/BaseEntity&gt;
+      &lt;Groupings&gt;
+        &lt;Grouping Name="Product Category"&gt;
+          &lt;Expression Name="Product Category"&gt;
+            &lt;Path&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Product--&gt;
+                &lt;RoleID&gt;Gbc0575d8-c020-4b4a-be45-bbf88013aca9&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Product Subcategory--&gt;
+                &lt;RoleID&gt;G59f93d17-7b9a-4700-a101-9322fdb58109&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Product Category--&gt;
+                &lt;RoleID&gt;G4d860b0a-2b57-4967-8fb9-133beee07067&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+            &lt;/Path&gt;
+            &lt;EntityRef&gt;
+              &lt;!--Product Category--&gt;
+              &lt;EntityID&gt;Gacb1e610-3ea3-4922-a2d8-e503e1d0a3d0&lt;/EntityID&gt;
+            &lt;/EntityRef&gt;
+          &lt;/Expression&gt;
+          &lt;Details&gt;
+            &lt;Expression Name="Product Category1"&gt;
+              &lt;AttributeRef&gt;
+                &lt;!--Name--&gt;
+                &lt;AttributeID&gt;G06eeff71-1bf2-461f-a84b-ff6268e3f684&lt;/AttributeID&gt;
+              &lt;/AttributeRef&gt;
+            &lt;/Expression&gt;
+          &lt;/Details&gt;
+        &lt;/Grouping&gt;
+        &lt;Grouping Name="Product Subcategory"&gt;
+          &lt;Expression Name="Product Subcategory"&gt;
+            &lt;Path&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Product--&gt;
+                &lt;RoleID&gt;Gbc0575d8-c020-4b4a-be45-bbf88013aca9&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Product Subcategory--&gt;
+                &lt;RoleID&gt;G59f93d17-7b9a-4700-a101-9322fdb58109&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+            &lt;/Path&gt;
+            &lt;EntityRef&gt;
+              &lt;!--Product Subcategory--&gt;
+              &lt;EntityID&gt;G8f91f894-d044-4da9-a138-772900aee688&lt;/EntityID&gt;
+            &lt;/EntityRef&gt;
+          &lt;/Expression&gt;
+          &lt;Details&gt;
+            &lt;Expression Name="Product Subcategory2"&gt;
+              &lt;AttributeRef&gt;
+                &lt;!--Name--&gt;
+                &lt;AttributeID&gt;G00b169b7-9f08-4f96-babd-5924781607b5&lt;/AttributeID&gt;
+              &lt;/AttributeRef&gt;
+            &lt;/Expression&gt;
+          &lt;/Details&gt;
+        &lt;/Grouping&gt;
+        &lt;Grouping Name="Product"&gt;
+          &lt;Expression Name="Product"&gt;
+            &lt;Path&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Product--&gt;
+                &lt;RoleID&gt;Gbc0575d8-c020-4b4a-be45-bbf88013aca9&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+            &lt;/Path&gt;
+            &lt;EntityRef&gt;
+              &lt;!--Product--&gt;
+              &lt;EntityID&gt;G73aed554-12c3-4750-8981-997fe69705ab&lt;/EntityID&gt;
+            &lt;/EntityRef&gt;
+          &lt;/Expression&gt;
+          &lt;Details&gt;
+            &lt;Expression Name="Product3"&gt;
+              &lt;AttributeRef&gt;
+                &lt;!--Name--&gt;
+                &lt;AttributeID&gt;G64343d16-f565-44c8-884c-681a8716c07e&lt;/AttributeID&gt;
+              &lt;/AttributeRef&gt;
+            &lt;/Expression&gt;
+          &lt;/Details&gt;
+        &lt;/Grouping&gt;
+        &lt;Grouping Name="Order Year"&gt;
+          &lt;Expression Name="Order Year"&gt;
+            &lt;Path&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Sales Order--&gt;
+                &lt;RoleID&gt;Gd807fa2d-8de1-4304-90d7-ea92ecf54d77&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+            &lt;/Path&gt;
+            &lt;AttributeRef&gt;
+              &lt;!--Order Year--&gt;
+              &lt;AttributeID&gt;Gb4a8fe12-4ec9-4fa9-8b33-82a9acfea68c&lt;/AttributeID&gt;
+            &lt;/AttributeRef&gt;
+          &lt;/Expression&gt;
+        &lt;/Grouping&gt;
+        &lt;Grouping Name="Order Quarter"&gt;
+          &lt;Expression Name="Order Quarter"&gt;
+            &lt;Path&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Sales Order--&gt;
+                &lt;RoleID&gt;Gd807fa2d-8de1-4304-90d7-ea92ecf54d77&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+            &lt;/Path&gt;
+            &lt;AttributeRef&gt;
+              &lt;!--Order Quarter--&gt;
+              &lt;AttributeID&gt;Gd7e9b121-ae15-44be-9fec-0a0265c133f4&lt;/AttributeID&gt;
+            &lt;/AttributeRef&gt;
+          &lt;/Expression&gt;
+        &lt;/Grouping&gt;
+      &lt;/Groupings&gt;
+      &lt;Filter&gt;
+        &lt;Expression Name="expr1"&gt;
+          &lt;Function&gt;
+            &lt;FunctionName&gt;And&lt;/FunctionName&gt;
+            &lt;Arguments&gt;
+              &lt;Expression&gt;
+                &lt;Function&gt;
+                  &lt;FunctionName&gt;In&lt;/FunctionName&gt;
+                  &lt;Arguments&gt;
+                    &lt;Expression&gt;
+                      &lt;Path&gt;
+                        &lt;RolePathItem&gt;
+                          &lt;!--Product--&gt;
+                          &lt;RoleID&gt;Gbc0575d8-c020-4b4a-be45-bbf88013aca9&lt;/RoleID&gt;
+                        &lt;/RolePathItem&gt;
+                        &lt;RolePathItem&gt;
+                          &lt;!--Product Subcategory--&gt;
+                          &lt;RoleID&gt;G59f93d17-7b9a-4700-a101-9322fdb58109&lt;/RoleID&gt;
+                        &lt;/RolePathItem&gt;
+                        &lt;RolePathItem&gt;
+                          &lt;!--Product Category--&gt;
+                          &lt;RoleID&gt;G4d860b0a-2b57-4967-8fb9-133beee07067&lt;/RoleID&gt;
+                        &lt;/RolePathItem&gt;
+                      &lt;/Path&gt;
+                      &lt;EntityRef&gt;
+                        &lt;!--Product Category--&gt;
+                        &lt;EntityID&gt;Gacb1e610-3ea3-4922-a2d8-e503e1d0a3d0&lt;/EntityID&gt;
+                      &lt;/EntityRef&gt;
+                    &lt;/Expression&gt;
+                    &lt;Expression&gt;
+                      &lt;Literal&gt;
+                        &lt;DataType&gt;EntityKey&lt;/DataType&gt;
+                        &lt;Values&gt;
+                          &lt;Value&gt;AAEAAAA=&lt;/Value&gt;
+                          &lt;Value&gt;AAMAAAA=&lt;/Value&gt;
+                          &lt;Value&gt;AAQAAAA=&lt;/Value&gt;
+                        &lt;/Values&gt;
+                      &lt;/Literal&gt;
+                    &lt;/Expression&gt;
+                  &lt;/Arguments&gt;
+                &lt;/Function&gt;
+                &lt;CustomProperties&gt;
+                  &lt;CustomProperty Name="qd:FilterCondition" /&gt;
+                &lt;/CustomProperties&gt;
+              &lt;/Expression&gt;
+              &lt;Expression&gt;
+                &lt;Function&gt;
+                  &lt;FunctionName&gt;GreaterThanOrEquals&lt;/FunctionName&gt;
+                  &lt;Arguments&gt;
+                    &lt;Expression&gt;
+                      &lt;Function&gt;
+                        &lt;FunctionName&gt;Date&lt;/FunctionName&gt;
+                        &lt;Arguments&gt;
+                          &lt;Expression&gt;
+                            &lt;Path&gt;
+                              &lt;RolePathItem&gt;
+                                &lt;!--Sales Order--&gt;
+                                &lt;RoleID&gt;Gd807fa2d-8de1-4304-90d7-ea92ecf54d77&lt;/RoleID&gt;
+                              &lt;/RolePathItem&gt;
+                            &lt;/Path&gt;
+                            &lt;AttributeRef&gt;
+                              &lt;!--Order Date--&gt;
+                              &lt;AttributeID&gt;G1f88a445-ae2b-497e-8b0b-3f797fbc868c&lt;/AttributeID&gt;
+                            &lt;/AttributeRef&gt;
+                          &lt;/Expression&gt;
+                        &lt;/Arguments&gt;
+                      &lt;/Function&gt;
+                    &lt;/Expression&gt;
+                    &lt;Expression&gt;
+                      &lt;ParameterRef&gt;
+                        &lt;ParameterName&gt;Order Date&lt;/ParameterName&gt;
+                      &lt;/ParameterRef&gt;
+                    &lt;/Expression&gt;
+                  &lt;/Arguments&gt;
+                &lt;/Function&gt;
+                &lt;CustomProperties&gt;
+                  &lt;CustomProperty Name="qd:FilterCondition" /&gt;
+                &lt;/CustomProperties&gt;
+              &lt;/Expression&gt;
+            &lt;/Arguments&gt;
+          &lt;/Function&gt;
+          &lt;CustomProperties&gt;
+            &lt;CustomProperty Name="qd:Filter" /&gt;
+            &lt;CustomProperty Name="qd:ContextEntityID"&gt;
+              &lt;Value xsi:type="xsd:string"&gt;G7d048573-fb87-42c3-9660-f171d6645f3a&lt;/Value&gt;
+            &lt;/CustomProperty&gt;
+            &lt;CustomProperty Name="qd:AutoChangeBaseEntity" /&gt;
+            &lt;CustomProperty Name="qd:Design"&gt;
+              &lt;Value xsi:type="xsd:string"&gt;expr2&lt;/Value&gt;
+            &lt;/CustomProperty&gt;
+          &lt;/CustomProperties&gt;
+        &lt;/Expression&gt;
+      &lt;/Filter&gt;
+    &lt;/Hierarchy&gt;
+  &lt;/Hierarchies&gt;
+  &lt;MeasureGroups&gt;
+    &lt;MeasureGroup&gt;
+      &lt;BaseEntity&gt;
+        &lt;!--Sale--&gt;
+        &lt;EntityID&gt;G7d048573-fb87-42c3-9660-f171d6645f3a&lt;/EntityID&gt;
+      &lt;/BaseEntity&gt;
+      &lt;Measures&gt;
+        &lt;Expression Name="Sum Total Due_Sum"&gt;
+          &lt;Function&gt;
+            &lt;FunctionName&gt;Sum&lt;/FunctionName&gt;
+            &lt;Arguments&gt;
+              &lt;Expression&gt;
+                &lt;Path&gt;
+                  &lt;RolePathItem&gt;
+                    &lt;!--Sales Order--&gt;
+                    &lt;RoleID&gt;Gd807fa2d-8de1-4304-90d7-ea92ecf54d77&lt;/RoleID&gt;
+                  &lt;/RolePathItem&gt;
+                &lt;/Path&gt;
+                &lt;AttributeRef&gt;
+                  &lt;!--Total Due--&gt;
+                  &lt;AttributeID&gt;G39091120-95cf-4639-8b56-be464861440c&lt;/AttributeID&gt;
+                &lt;/AttributeRef&gt;
+              &lt;/Expression&gt;
+            &lt;/Arguments&gt;
+          &lt;/Function&gt;
+          &lt;CustomProperties&gt;
+            &lt;CustomProperty Name="qd:Design"&gt;
+              &lt;Value xsi:type="xsd:string"&gt;Sum Total Due&lt;/Value&gt;
+            &lt;/CustomProperty&gt;
+          &lt;/CustomProperties&gt;
+        &lt;/Expression&gt;
+      &lt;/Measures&gt;
+    &lt;/MeasureGroup&gt;
+  &lt;/MeasureGroups&gt;
+  &lt;CalculatedAttributes&gt;
+    &lt;Expression Name="Sum Total Due"&gt;
+      &lt;Function&gt;
+        &lt;FunctionName&gt;Aggregate&lt;/FunctionName&gt;
+        &lt;Arguments&gt;
+          &lt;Expression&gt;
+            &lt;Path&gt;
+              &lt;RolePathItem&gt;
+                &lt;!--Sales Order--&gt;
+                &lt;RoleID&gt;Gd807fa2d-8de1-4304-90d7-ea92ecf54d77&lt;/RoleID&gt;
+              &lt;/RolePathItem&gt;
+            &lt;/Path&gt;
+            &lt;AttributeRef&gt;
+              &lt;!--Sum Total Due--&gt;
+              &lt;AttributeID&gt;G61256a47-8571-4aae-b9f5-0389812e8a3e&lt;/AttributeID&gt;
+            &lt;/AttributeRef&gt;
+          &lt;/Expression&gt;
+        &lt;/Arguments&gt;
+      &lt;/Function&gt;
+      &lt;CustomProperties&gt;
+        &lt;CustomProperty Name="qd:ContextEntityID"&gt;
+          &lt;Value xsi:type="xsd:string"&gt;G7d048573-fb87-42c3-9660-f171d6645f3a&lt;/Value&gt;
+        &lt;/CustomProperty&gt;
+      &lt;/CustomProperties&gt;
+    &lt;/Expression&gt;
+  &lt;/CalculatedAttributes&gt;
+  &lt;Parameters&gt;
+    &lt;Parameter Name="Order Date"&gt;
+      &lt;DataType&gt;DateTime&lt;/DataType&gt;
+      &lt;Expression&gt;
+        &lt;Literal&gt;
+          &lt;DataType&gt;DateTime&lt;/DataType&gt;
+          &lt;Value&gt;2003-05-01T00:00:00&lt;/Value&gt;
+        &lt;/Literal&gt;
+      &lt;/Expression&gt;
+    &lt;/Parameter&gt;
+  &lt;/Parameters&gt;
+&lt;/SemanticQuery&gt;</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="Order Date">
+            <Value>=Parameters!OrderDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <DataSourceName>dataSource1</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="ProductCategory">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Product Category</DataField>
+        </Field>
+        <Field Name="ProductCategory1">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Product Category1</DataField>
+        </Field>
+        <Field Name="ProductSubcategory">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Product Subcategory</DataField>
+        </Field>
+        <Field Name="ProductSubcategory2">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Product Subcategory2</DataField>
+        </Field>
+        <Field Name="Product">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Product</DataField>
+        </Field>
+        <Field Name="Product3">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Product3</DataField>
+        </Field>
+        <Field Name="OrderYear">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Order Year</DataField>
+        </Field>
+        <Field Name="OrderQuarter">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Order Quarter</DataField>
+        </Field>
+        <Field Name="SumTotalDue_Sum">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Sum Total Due_Sum</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <Width>8.5in</Width>
+  <InteractiveHeight>11in</InteractiveHeight>
+  <Language>en-US</Language>
+  <TopMargin>0.5in</TopMargin>
+</Report>

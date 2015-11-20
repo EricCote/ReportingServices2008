@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="master">
+      <rd:DataSourceID>4f93bdde-5d44-470a-ba4d-d8fd6abf1a26</rd:DataSourceID>
+      <DataSourceReference>master</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <Description>This report provides types and extended properties for each column in a table, categorized by table and schema.</Description>
+  <ReportParameters>
+    <ReportParameter Name="DatabaseName">
+      <DataType>String</DataType>
+      <Prompt>Database Name:</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SchemaName">
+      <DataType>String</DataType>
+      <Prompt>Schema Name:</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TableName">
+      <DataType>String</DataType>
+      <Prompt>Table Name:</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <rd:SnapToGrid>false</rd:SnapToGrid>
+  <RightMargin>1in</RightMargin>
+  <LeftMargin>1in</LeftMargin>
+  <BottomMargin>1in</BottomMargin>
+  <rd:ReportID>e47f6f29-eee2-4d37-809d-fda6603e50a9</rd:ReportID>
+  <PageWidth>17in</PageWidth>
+  <DataSets>
+    <DataSet Name="TablesColumns">
+      <Fields>
+        <Field Name="Schema">
+          <DataField>Schema</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Table">
+          <DataField>Table</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ColumnID">
+          <DataField>ColumnID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Column">
+          <DataField>Column</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Length">
+          <DataField>Length</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="PrimaryKey">
+          <DataField>PrimaryKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Nullable">
+          <DataField>Nullable</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ColumnExtendedProperty">
+          <DataField>ColumnExtendedProperty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ColumnExtendedValue">
+          <DataField>ColumnExtendedValue</DataField>
+          <rd:TypeName>System.Object</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>master</DataSourceName>
+        <CommandText>EXECUTE (N'SELECT 
+    s.[name] AS [Schema], 
+    t.[name] AS [Table], 
+    c.[column_id] AS [ColumnID], 
+    c.[name] AS [Column], 
+    y.[name] AS [Type], 
+    c.[max_length] AS [Length], 
+    CASE 
+        WHEN (ic.[index_id] IS NOT NULL) THEN 1 
+        ELSE 0 
+    END AS [PrimaryKey], 
+    c.[is_nullable] AS [Nullable], 
+    ep.[name] AS [ColumnExtendedProperty], 
+    ep.value AS [ColumnExtendedValue] 
+FROM [' + @DatabaseName + '].[sys].[schemas] s 
+    INNER JOIN [' + @DatabaseName + '].[sys].[tables] t 
+    ON s.[schema_id] = t.[schema_id] 
+        AND s.[name] = ''' + @SchemaName + ''' 
+        AND t.[name] = ''' + @TableName + ''' 
+    INNER JOIN ' + @DatabaseName + '.[sys].[columns] c 
+    ON t.[object_id] = c.[object_id] 
+    INNER JOIN [' + @DatabaseName + '].[sys].[types] y 
+    ON c.[system_type_id] = y.[system_type_id] 
+        AND c.[user_type_id] = y.[user_type_id] 
+    LEFT OUTER JOIN [' + @DatabaseName + '].[sys].[indexes] i 
+    ON t.[object_id] = i.[object_id] 
+        AND i.[is_primary_key] = 1 
+    LEFT OUTER JOIN [' + @DatabaseName + '].[sys].[index_columns] ic 
+    ON ic.[index_column_id] = c.[column_id] 
+        AND i.[object_id] = ic.[object_id] 
+        AND i.[index_id] = ic.[index_id] 
+        AND ic.[key_ordinal] &lt;&gt; 0 
+    LEFT OUTER JOIN [' + @DatabaseName + '].[sys].[extended_properties] ep 
+    ON t.[object_id] = ep.[major_id] 
+        AND c.[column_id] = ep.[minor_id] 
+ORDER BY s.[name], t.[name], c.[column_id] ;')</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@DatabaseName">
+            <Value>=Parameters!DatabaseName.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@SchemaName">
+            <Value>=Parameters!SchemaName.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@TableName">
+            <Value>=Parameters!TableName.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <Timeout>60</Timeout>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Author>Microsoft Corporation</Author>
+  <Code />
+  <Width>12in</Width>
+  <Body>
+    <ReportItems>
+      <Table Name="TablesColumnsTable">
+        <DataSetName>TablesColumns</DataSetName>
+        <TableGroups>
+          <TableGroup>
+            <Grouping Name="TablesColumnsTable_Group1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!ColumnID.Value</GroupExpression>
+              </GroupExpressions>
+            </Grouping>
+          </TableGroup>
+        </TableGroups>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="Column_1">
+                      <rd:DefaultName>Column_1</rd:DefaultName>
+                      <HideDuplicates>TablesColumnsTable_Group1</HideDuplicates>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <ZIndex>6</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!Column.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="Type_1">
+                      <rd:DefaultName>Type_1</rd:DefaultName>
+                      <HideDuplicates>TablesColumnsTable_Group1</HideDuplicates>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <ZIndex>5</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!Type.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="Length_1">
+                      <rd:DefaultName>Length_1</rd:DefaultName>
+                      <HideDuplicates>TablesColumnsTable_Group1</HideDuplicates>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <TextAlign>Right</TextAlign>
+                        <Format>g</Format>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>10pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <ZIndex>4</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!Length.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="PrimaryKey_1">
+                      <rd:DefaultName>PrimaryKey_1</rd:DefaultName>
+                      <HideDuplicates>TablesColumnsTable_Group1</HideDuplicates>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <ZIndex>3</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=iif(Fields!PrimaryKey.Value = 1, "Yes", "No")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="Nullable_1">
+                      <rd:DefaultName>Nullable_1</rd:DefaultName>
+                      <HideDuplicates>TablesColumnsTable_Group1</HideDuplicates>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=iif(Fields!Nullable.Value = "True", "Yes", "No")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="ColumnExtendedProperty">
+                      <rd:DefaultName>ColumnExtendedProperty</rd:DefaultName>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <ZIndex>1</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!ColumnExtendedProperty.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="ColumnExtendedValue">
+                      <rd:DefaultName>ColumnExtendedValue</rd:DefaultName>
+                      <Style>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <BackgroundColor>=iif(RowNumber(Nothing) Mod 2, "PaleGreen", "White")</BackgroundColor>
+                        <PaddingTop>2pt</PaddingTop>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!ColumnExtendedValue.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.25in</Height>
+            </TableRow>
+          </TableRows>
+          <Sorting>
+            <SortBy>
+              <SortExpression>=Fields!Schema.Value</SortExpression>
+              <Direction>Ascending</Direction>
+            </SortBy>
+            <SortBy>
+              <SortExpression>=Fields!Table.Value</SortExpression>
+              <Direction>Ascending</Direction>
+            </SortBy>
+            <SortBy>
+              <SortExpression>=Fields!ColumnID.Value</SortExpression>
+              <Direction>Ascending</Direction>
+            </SortBy>
+          </Sorting>
+        </Details>
+        <Style />
+        <TableColumns>
+          <TableColumn>
+            <Width>2in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.25in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.625in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+          <TableColumn>
+            <Width>1in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+          <TableColumn>
+            <Width>1in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+          <TableColumn>
+            <Width>2in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+          <TableColumn>
+            <Width>4.125in</Width>
+            <FixedHeader>false</FixedHeader>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+    </ReportItems>
+    <Height>0.25in</Height>
+    <Style />
+  </Body>
+  <Language>en-US</Language>
+  <TopMargin>1in</TopMargin>
+</Report>

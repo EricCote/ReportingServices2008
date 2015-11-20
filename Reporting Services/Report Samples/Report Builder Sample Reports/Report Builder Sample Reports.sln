@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Report Builder Sample Reports", "Report Builder Sample Reports.rptproj", "{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Production|Default = Production|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.Debug|Default.ActiveCfg = Debug
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.Debug|Default.Build.0 = DebugLocal
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.Debug|Default.Deploy.0 = DebugLocal
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.DebugLocal|Default.Build.0 = DebugLocal
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.Production|Default.ActiveCfg = Production
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.Production|Default.Build.0 = Production
+		{9EBC2152-E69C-4468-B1CD-FC630A4E4BC1}.Production|Default.Deploy.0 = Production
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

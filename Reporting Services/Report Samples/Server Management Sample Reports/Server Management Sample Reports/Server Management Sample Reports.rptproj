@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <State>$base64$PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTE2Ij8+DQo8U291cmNlQ29udHJvbEluZm8geG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6ZHdkPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL0RhdGFXYXJlaG91c2UvRGVzaWduZXIvMS4wIj4NCiAgPEVuYWJsZWQ+ZmFsc2U8L0VuYWJsZWQ+DQogIDxQcm9qZWN0TmFtZSAvPg0KICA8QXV4UGF0aCAvPg0KICA8TG9jYWxQYXRoIC8+DQogIDxQcm92aWRlciAvPg0KPC9Tb3VyY2VDb250cm9sSW5mbz4=</State>
+  <DataSources>
+    <ProjectItem>
+      <Name>master.rds</Name>
+      <FullPath>master.rds</FullPath>
+    </ProjectItem>
+  </DataSources>
+  <Reports>
+    <ProjectItem>
+      <Name>Columns by Table and Schema Subreport.rdl</Name>
+      <FullPath>Columns by Table and Schema Subreport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Schema Table Extended Properties.rdl</Name>
+      <FullPath>Schema Table Extended Properties.rdl</FullPath>
+    </ProjectItem>
+  </Reports>
+  <Configurations>
+    <Configuration>
+      <Name>Debug</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+        <TargetFolder>Server Management Sample Reports</TargetFolder>
+        <OverwriteDataSources>true</OverwriteDataSources>
+        <StartItem>Schema Table Extended Properties.rdl</StartItem>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>DebugLocal</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <TargetFolder>Server Management Sample Reports</TargetFolder>
+        <StartItem>Columns by Table and Schema.rdl</StartItem>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>Production</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+        <TargetFolder>Server Management Sample Reports</TargetFolder>
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>
